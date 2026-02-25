@@ -10,7 +10,7 @@ import {
   type CodeAssistServer,
   UserTierId,
   getCodeAssistServer,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 
 export interface PrivacyState {
   isLoading: boolean;

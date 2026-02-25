@@ -1,13 +1,13 @@
 {
-  "name": "gemini-cli-vscode-ide-companion",
-  "displayName": "Gemini CLI Companion",
-  "description": "Enable Gemini CLI with direct access to your IDE workspace.",
+  "name": "@isqcoder/isqcoder-vscode",
+  "displayName": "isQCoder CLI Companion",
+  "description": "Enable isQCoder CLI with direct access to your IDE workspace.",
   "version": "0.30.0-nightly.20260210.a2174751d",
-  "publisher": "google",
+  "publisher": "isqcoder",
   "icon": "assets/icon.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/google-gemini/gemini-cli.git",
+    "url": "https://github.com/isQCoder/isQCoder-cli.git",
     "directory": "packages/vscode-ide-companion"
   },
   "engines": {
@@ -19,10 +19,10 @@
     "AI"
   ],
   "keywords": [
-    "gemini-cli",
-    "gemini cli",
-    "gemini",
-    "gemini code",
+    "isqcoder-cli",
+    "isqcoder cli",
+    "isqcoder",
+    "quantum computing",
     "cli",
     "ide integration",
     "ide companion"
@@ -32,74 +32,74 @@
   ],
   "contributes": {
     "configuration": {
-      "title": "Gemini CLI",
+      "title": "isQCoder CLI",
       "properties": {
-        "gemini-cli.debug.logging.enabled": {
+        "isqcoder-cli.debug.logging.enabled": {
           "type": "boolean",
           "default": false,
-          "description": "Enable detailed logging for debugging the Gemini CLI Companion."
+          "description": "Enable detailed logging for debugging the isQCoder CLI Companion."
         }
       }
     },
     "languages": [
       {
-        "id": "gemini-diff-editable"
+        "id": "isqcoder-diff-editable"
       }
     ],
     "commands": [
       {
-        "command": "gemini.diff.accept",
-        "title": "Gemini CLI: Accept Diff",
+        "command": "isqcoder.diff.accept",
+        "title": "isQCoder CLI: Accept Diff",
         "icon": "$(check)"
       },
       {
-        "command": "gemini.diff.cancel",
-        "title": "Gemini CLI: Close Diff Editor",
+        "command": "isqcoder.diff.cancel",
+        "title": "isQCoder CLI: Close Diff Editor",
         "icon": "$(close)"
       },
       {
-        "command": "gemini-cli.runGeminiCLI",
-        "title": "Gemini CLI: Run"
+        "command": "isqcoder-cli.runIsQCoderCLI",
+        "title": "isQCoder CLI: Run"
       },
       {
-        "command": "gemini-cli.showNotices",
-        "title": "Gemini CLI: View Third-Party Notices"
+        "command": "isqcoder-cli.showNotices",
+        "title": "isQCoder CLI: View Third-Party Notices"
       }
     ],
     "menus": {
       "commandPalette": [
         {
-          "command": "gemini.diff.accept",
-          "when": "gemini.diff.isVisible"
+          "command": "isqcoder.diff.accept",
+          "when": "isqcoder.diff.isVisible"
         },
         {
-          "command": "gemini.diff.cancel",
-          "when": "gemini.diff.isVisible"
+          "command": "isqcoder.diff.cancel",
+          "when": "isqcoder.diff.isVisible"
         }
       ],
       "editor/title": [
         {
-          "command": "gemini.diff.accept",
-          "when": "gemini.diff.isVisible",
+          "command": "isqcoder.diff.accept",
+          "when": "isqcoder.diff.isVisible",
           "group": "navigation"
         },
         {
-          "command": "gemini.diff.cancel",
-          "when": "gemini.diff.isVisible",
+          "command": "isqcoder.diff.cancel",
+          "when": "isqcoder.diff.isVisible",
           "group": "navigation"
         }
       ]
     },
     "keybindings": [
       {
-        "command": "gemini.diff.accept",
+        "command": "isqcoder.diff.accept",
         "key": "ctrl+s",
-        "when": "gemini.diff.isVisible"
+        "when": "isqcoder.diff.isVisible"
       },
       {
-        "command": "gemini.diff.accept",
+        "command": "isqcoder.diff.accept",
         "key": "cmd+s",
-        "when": "gemini.diff.isVisible"
+        "when": "isqcoder.diff.isVisible"
       }
     ]
   },

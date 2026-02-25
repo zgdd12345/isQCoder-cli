@@ -12,8 +12,8 @@ import type {
   Config,
   ConversationRecord,
   ResumedSessionData,
-} from '@google/gemini-cli-core';
-import { coreEvents } from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
+import { coreEvents } from '@isqcoder/isqcoder-cli-core';
 import type { SessionInfo } from '../../utils/sessionUtils.js';
 import { convertSessionToHistoryFormats } from '../../utils/sessionUtils.js';
 import type { Part } from '@google/genai';

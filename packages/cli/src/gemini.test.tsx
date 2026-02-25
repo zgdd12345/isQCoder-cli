@@ -41,7 +41,7 @@ import {
   debugLogger,
   coreEvents,
   AuthType,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 import { act } from 'react';
 import { type InitializationResult } from './core/initializer.js';
 import { runNonInteractive } from './nonInteractiveCli.js';
@@ -56,9 +56,9 @@ vi.mock('./nonInteractiveCli.js', () => ({
   runNonInteractive: runNonInteractiveSpy,
 }));
 
-vi.mock('@google/gemini-cli-core', async (importOriginal) => {
+vi.mock('@isqcoder/isqcoder-cli-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@google/gemini-cli-core')>();
+    await importOriginal<typeof import('@isqcoder/isqcoder-cli-core')>();
   return {
     ...actual,
     recordSlowRender: vi.fn(),
@@ -328,7 +328,7 @@ describe('initializeOutputListenersAndFlush', () => {
   });
 
   it('should flush backlogs and setup listeners if no listeners exist', async () => {
-    const { coreEvents } = await import('@google/gemini-cli-core');
+    const { coreEvents } = await import('@isqcoder/isqcoder-cli-core');
     const { initializeOutputListenersAndFlush } = await import('./gemini.js');
 
     // Mock listenerCount to return 0
@@ -1258,7 +1258,7 @@ describe('startInteractiveUI', () => {
   });
 
   it('should enable mouse events when alternate buffer is enabled', async () => {
-    const { enableMouseEvents } = await import('@google/gemini-cli-core');
+    const { enableMouseEvents } = await import('@isqcoder/isqcoder-cli-core');
     await startTestInteractiveUI(
       mockConfig,
       mockSettings,
@@ -1285,7 +1285,7 @@ describe('startInteractiveUI', () => {
   });
 
   it('should perform all startup tasks in correct order', async () => {
-    const { getVersion } = await import('@google/gemini-cli-core');
+    const { getVersion } = await import('@isqcoder/isqcoder-cli-core');
     const { checkForUpdates } = await import('./ui/utils/updateCheck.js');
     const { registerCleanup } = await import('./utils/cleanup.js');
 
@@ -1313,7 +1313,7 @@ describe('startInteractiveUI', () => {
   });
 
   it('should not recordSlowRender when less than threshold', async () => {
-    const { recordSlowRender } = await import('@google/gemini-cli-core');
+    const { recordSlowRender } = await import('@isqcoder/isqcoder-cli-core');
     performance.now.mockReturnValueOnce(0);
     await startTestInteractiveUI(
       mockConfig,
@@ -1328,7 +1328,7 @@ describe('startInteractiveUI', () => {
   });
 
   it('should call recordSlowRender when more than threshold', async () => {
-    const { recordSlowRender } = await import('@google/gemini-cli-core');
+    const { recordSlowRender } = await import('@isqcoder/isqcoder-cli-core');
     performance.now.mockReturnValueOnce(0);
     performance.now.mockReturnValueOnce(300);
 

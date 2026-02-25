@@ -19,7 +19,7 @@ import {
   AuthType,
   type Config,
   CoreToolCallStatus,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 import { loadCliConfig, type CliArgs } from '../config/config.js';
 import {
   SessionSelector,

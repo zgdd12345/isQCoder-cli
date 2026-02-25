@@ -29,7 +29,7 @@ import { ToolActionsProvider } from '../ui/contexts/ToolActionsContext.js';
 import { AskUserActionsProvider } from '../ui/contexts/AskUserActionsContext.js';
 import { TerminalProvider } from '../ui/contexts/TerminalContext.js';
 
-import { makeFakeConfig, type Config } from '@google/gemini-cli-core';
+import { makeFakeConfig, type Config } from '@isqcoder/isqcoder-cli-core';
 import { FakePersistentState } from './persistentStateFake.js';
 import { AppContext, type AppState } from '../ui/contexts/AppContext.js';
 import { createMockSettings } from './settings.js';

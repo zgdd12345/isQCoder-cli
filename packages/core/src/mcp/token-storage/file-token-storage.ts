@@ -25,7 +25,7 @@ export class FileTokenStorage extends BaseTokenStorage {
 
   private deriveEncryptionKey(): Buffer {
     const salt = `${os.hostname()}-${os.userInfo().username}-gemini-cli`;
-    return crypto.scryptSync('gemini-cli-oauth', salt, 32);
+    return crypto.scryptSync('isqcoder-oauth', salt, 32);
   }
 
   private encrypt(text: string): string {

@@ -349,7 +349,7 @@ export function renderUserMemory(memory?: string | HierarchicalMemory): string {
     const trimmed = memory.trim();
     if (trimmed.length === 0) return '';
     return `
-# Contextual Instructions (GEMINI.md)
+# Contextual Instructions (ISQCODER.md)
 The following content is loaded from local and global configuration files.
 **Context Precedence:**
 - **Global (~/.gemini/):** foundational user preferences. Apply these broadly.

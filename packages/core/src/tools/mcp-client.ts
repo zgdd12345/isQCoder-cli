@@ -1448,7 +1448,7 @@ export async function connectToMcpServer(
 ): Promise<Client> {
   const mcpClient = new Client(
     {
-      name: 'gemini-cli-mcp-client',
+      name: 'isqcoder-mcp-client',
       version: clientVersion,
     },
     {

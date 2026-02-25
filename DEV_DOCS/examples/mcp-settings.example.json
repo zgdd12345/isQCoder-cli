@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "isqcoder": {
+      "command": "python",
+      "args": ["-m", "isq_agent.mcp_server"],
+      "cwd": "/path/to/isQCodeAgent",
+      "env": {
+        "LLM_PROVIDER": "zhipu",
+        "ISQC_DOCKER_IMAGE": "isqc-python:latest"
+      },
+      "trust": true
+    }
+  }
+}

@@ -12,7 +12,7 @@ import {
   type PolicySettings,
   createPolicyEngineConfig as createCorePolicyEngineConfig,
   createPolicyUpdater as createCorePolicyUpdater,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 import { type Settings } from './settings.js';
 
 export async function createPolicyEngineConfig(

@@ -14,7 +14,7 @@ import {
   openBrowserSecurely,
   shouldLaunchBrowser,
   type ValidationIntent,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 import { useKeypress } from '../hooks/useKeypress.js';
 import { keyMatchers, Command } from '../keyMatchers.js';
 

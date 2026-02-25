@@ -89,4 +89,24 @@ describe('PromptProvider', () => {
       `# Contextual Instructions (${DEFAULT_CONTEXT_FILENAME}, CUSTOM.md)`,
     );
   });
+
+  it('should include isQ language knowledge in system prompt', () => {
+    vi.mocked(getAllGeminiMdFilenames).mockReturnValue([
+      DEFAULT_CONTEXT_FILENAME,
+    ]);
+
+    const provider = new PromptProvider();
+    const prompt = provider.getCoreSystemPrompt(mockConfig);
+
+    // Verify isQ language reference section is present
+    expect(prompt).toContain('# isQ Language Reference');
+    // Verify key syntax rules
+    expect(prompt).toContain('`qbit q[n];`');
+    expect(prompt).toContain('`procedure main() { ... }`');
+    expect(prompt).toContain('for i in 0:n');
+    // Verify quantum tools hints
+    expect(prompt).toContain('isq_compile');
+    expect(prompt).toContain('isq_simulate');
+    expect(prompt).toContain('isq_rag_search');
+  });
 });

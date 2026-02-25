@@ -25,7 +25,7 @@ import {
   KeychainTokenStorage,
   loadAgentsFromDirectory,
   loadSkillsFromDir,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 import {
   loadSettings,
   createTestMergedSettings,
@@ -101,9 +101,9 @@ const mockLogExtensionInstallEvent = vi.hoisted(() => vi.fn());
 const mockLogExtensionUninstall = vi.hoisted(() => vi.fn());
 const mockLogExtensionUpdateEvent = vi.hoisted(() => vi.fn());
 const mockLogExtensionDisable = vi.hoisted(() => vi.fn());
-vi.mock('@google/gemini-cli-core', async (importOriginal) => {
+vi.mock('@isqcoder/isqcoder-cli-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@google/gemini-cli-core')>();
+    await importOriginal<typeof import('@isqcoder/isqcoder-cli-core')>();
   return {
     ...actual,
     logExtensionEnable: mockLogExtensionEnable,

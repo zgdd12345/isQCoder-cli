@@ -11,7 +11,7 @@ import type {
   ToolCallConfirmationDetails,
   FilterFilesOptions,
   ConversationRecord,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 import {
   CoreToolCallStatus,
   AuthType,
@@ -36,7 +36,7 @@ import {
   Kind,
   partListUnionToString,
   LlmRole,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 import * as acp from '@agentclientprotocol/sdk';
 import { AcpFileSystemService } from './fileSystemService.js';
 import { getAcpErrorMessage } from './acpErrors.js';

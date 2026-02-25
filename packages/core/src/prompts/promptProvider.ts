@@ -123,6 +123,8 @@ export class PromptProvider {
         preamble: this.withSection('preamble', () => ({
           interactive: interactiveMode,
         })),
+        isqKnowledge: this.withSection('isqKnowledge', () => true),
+        isqtoolsWorkflow: this.withSection('isqtoolsWorkflow', () => true),
         coreMandates: this.withSection('coreMandates', () => ({
           interactive: interactiveMode,
           hasSkills: skills.length > 0,

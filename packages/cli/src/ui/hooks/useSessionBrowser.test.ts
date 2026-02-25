@@ -19,8 +19,8 @@ import {
   type ConversationRecord,
   type MessageRecord,
   CoreToolCallStatus,
-} from '@google/gemini-cli-core';
-import { coreEvents } from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
+import { coreEvents } from '@isqcoder/isqcoder-cli-core';
 
 // Mock modules
 vi.mock('fs/promises');

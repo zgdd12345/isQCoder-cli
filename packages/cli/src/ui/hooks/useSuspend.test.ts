@@ -24,14 +24,14 @@ import {
   exitAlternateScreen,
   enableLineWrapping,
   disableLineWrapping,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 import {
   cleanupTerminalOnExit,
   terminalCapabilityManager,
 } from '../utils/terminalCapabilityManager.js';
 
-vi.mock('@google/gemini-cli-core', async () => {
-  const actual = await vi.importActual('@google/gemini-cli-core');
+vi.mock('@isqcoder/isqcoder-cli-core', async () => {
+  const actual = await vi.importActual('@isqcoder/isqcoder-cli-core');
   return {
     ...actual,
     writeToStdout: vi.fn(),

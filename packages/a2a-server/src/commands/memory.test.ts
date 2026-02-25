@@ -9,7 +9,7 @@ import {
   listMemoryFiles,
   refreshMemory,
   showMemory,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   AddMemoryCommand,
@@ -23,12 +23,12 @@ import type {
   AnyDeclarativeTool,
   Config,
   ToolRegistry,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 
 // Mock the core functions
-vi.mock('@google/gemini-cli-core', async (importOriginal) => {
+vi.mock('@isqcoder/isqcoder-cli-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@google/gemini-cli-core')>();
+    await importOriginal<typeof import('@isqcoder/isqcoder-cli-core')>();
   return {
     ...actual,
     showMemory: vi.fn(),

@@ -10,7 +10,7 @@ import {
   type IndividualToolCallDisplay,
   type HistoryItemToolGroup,
 } from '../types.js';
-import { CoreToolCallStatus } from '@google/gemini-cli-core';
+import { CoreToolCallStatus } from '@isqcoder/isqcoder-cli-core';
 
 export interface ConfirmingToolState {
   tool: IndividualToolCallDisplay;

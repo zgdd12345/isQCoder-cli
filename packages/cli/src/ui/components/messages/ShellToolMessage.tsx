@@ -27,7 +27,7 @@ import {
   COMPLETED_SHELL_MAX_LINES,
 } from '../../constants.js';
 import { useAlternateBuffer } from '../../hooks/useAlternateBuffer.js';
-import { type Config, CoreToolCallStatus } from '@google/gemini-cli-core';
+import { type Config, CoreToolCallStatus } from '@isqcoder/isqcoder-cli-core';
 
 import { useUIState } from '../../contexts/UIStateContext.js';
 

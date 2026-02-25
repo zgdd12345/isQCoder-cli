@@ -26,7 +26,7 @@ import {
   type Config,
   type MessageBus,
   LlmRole,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 import {
   SettingScope,
   type LoadedSettings,
@@ -63,9 +63,9 @@ vi.mock('node:path', async (importOriginal) => {
 
 // Mock ReadManyFilesTool
 vi.mock(
-  '@google/gemini-cli-core',
+  '@isqcoder/isqcoder-cli-core',
   async (
-    importOriginal: () => Promise<typeof import('@google/gemini-cli-core')>,
+    importOriginal: () => Promise<typeof import('@isqcoder/isqcoder-cli-core')>,
   ) => {
     const actual = await importOriginal();
     return {

@@ -18,7 +18,7 @@ import { ShellToolMessage } from './ShellToolMessage.js';
 import { theme } from '../../semantic-colors.js';
 import { useConfig } from '../../contexts/ConfigContext.js';
 import { isShellTool } from './ToolShared.js';
-import { shouldHideToolCall } from '@google/gemini-cli-core';
+import { shouldHideToolCall } from '@isqcoder/isqcoder-cli-core';
 import { ShowMoreLines } from '../ShowMoreLines.js';
 import { useUIState } from '../../contexts/UIStateContext.js';
 import { getToolGroupBorderAppearance } from '../../utils/borderStyles.js';

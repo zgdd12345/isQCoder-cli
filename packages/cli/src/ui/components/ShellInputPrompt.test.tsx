@@ -7,7 +7,7 @@
 import { render } from '../../test-utils/render.js';
 import { ShellInputPrompt } from './ShellInputPrompt.js';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { ShellExecutionService } from '@google/gemini-cli-core';
+import { ShellExecutionService } from '@isqcoder/isqcoder-cli-core';
 import { useUIActions, type UIActions } from '../contexts/UIActionsContext.js';
 
 // Mock useUIActions
@@ -23,8 +23,8 @@ vi.mock('../hooks/useKeypress.js', () => ({
 }));
 
 // Mock ShellExecutionService
-vi.mock('@google/gemini-cli-core', async () => {
-  const actual = await vi.importActual('@google/gemini-cli-core');
+vi.mock('@isqcoder/isqcoder-cli-core', async () => {
+  const actual = await vi.importActual('@isqcoder/isqcoder-cli-core');
   return {
     ...actual,
     ShellExecutionService: {

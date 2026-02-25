@@ -9,7 +9,7 @@ import { ToolConfirmationMessage } from './ToolConfirmationMessage.js';
 import type {
   SerializableConfirmationDetails,
   Config,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 import { renderWithProviders } from '../../../test-utils/render.js';
 import { createMockSettings } from '../../../test-utils/settings.js';
 import { useToolActions } from '../../contexts/ToolActionsContext.js';

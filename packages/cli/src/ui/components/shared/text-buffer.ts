@@ -19,7 +19,7 @@ import {
   type EditorType,
   getEditorCommand,
   isGuiEditor,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 import {
   toCodePoints,
   cpLen,

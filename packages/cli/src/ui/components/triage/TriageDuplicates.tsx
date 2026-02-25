@@ -7,8 +7,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Box, Text } from 'ink';
 import Spinner from 'ink-spinner';
-import type { Config } from '@google/gemini-cli-core';
-import { debugLogger, spawnAsync, LlmRole } from '@google/gemini-cli-core';
+import type { Config } from '@isqcoder/isqcoder-cli-core';
+import { debugLogger, spawnAsync, LlmRole } from '@isqcoder/isqcoder-cli-core';
 import { useKeypress } from '../../hooks/useKeypress.js';
 import { keyMatchers, Command } from '../../keyMatchers.js';
 

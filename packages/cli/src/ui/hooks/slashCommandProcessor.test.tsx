@@ -23,7 +23,7 @@ import {
   makeFakeConfig,
   coreEvents,
   CoreEvent,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 import { SlashCommandConflictHandler } from '../../services/SlashCommandConflictHandler.js';
 
 const {
@@ -49,9 +49,9 @@ vi.mock('./useAlternateBuffer.js', () => ({
   useAlternateBuffer: mockUseAlternateBuffer,
 }));
 
-vi.mock('@google/gemini-cli-core', async (importOriginal) => {
+vi.mock('@isqcoder/isqcoder-cli-core', async (importOriginal) => {
   const original =
-    await importOriginal<typeof import('@google/gemini-cli-core')>();
+    await importOriginal<typeof import('@isqcoder/isqcoder-cli-core')>();
 
   return {
     ...original,

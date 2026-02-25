@@ -13,7 +13,7 @@ import {
 } from '@opentelemetry/api';
 import { safeJsonStringify } from '../utils/safeJsonStringify.js';
 
-const TRACER_NAME = 'gemini-cli';
+const TRACER_NAME = 'isqcoder';
 const TRACER_VERSION = 'v1';
 
 /**

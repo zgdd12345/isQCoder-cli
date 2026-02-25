@@ -8,7 +8,7 @@ import {
   coreEvents,
   CoreEvent,
   type SlashCommandConflictsPayload,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 
 export class SlashCommandConflictHandler {
   private notifiedConflicts = new Set<string>();

@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { Content } from '@google/gemini-cli-core';
+import type { Content } from '@isqcoder/isqcoder-cli-core';
 import type { GeminiCliAgent } from './agent.js';
 
 export interface AgentFilesystem {

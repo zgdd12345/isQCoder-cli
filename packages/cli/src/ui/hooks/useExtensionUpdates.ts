@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { debugLogger, type GeminiCLIExtension } from '@google/gemini-cli-core';
+import { debugLogger, type GeminiCLIExtension } from '@isqcoder/isqcoder-cli-core';
 import { getErrorMessage } from '../../utils/errors.js';
 import {
   ExtensionUpdateState,
@@ -19,7 +19,7 @@ import {
   updateExtension,
 } from '../../config/extensions/update.js';
 import { type ExtensionUpdateInfo } from '../../config/extension.js';
-import { checkExhaustive } from '@google/gemini-cli-core';
+import { checkExhaustive } from '@isqcoder/isqcoder-cli-core';
 import type { ExtensionManager } from '../../config/extension-manager.js';
 
 type ConfirmationRequestWrapper = {

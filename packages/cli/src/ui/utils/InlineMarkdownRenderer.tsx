@@ -7,7 +7,7 @@
 import React from 'react';
 import { Text } from 'ink';
 import { theme } from '../semantic-colors.js';
-import { debugLogger } from '@google/gemini-cli-core';
+import { debugLogger } from '@isqcoder/isqcoder-cli-core';
 
 // Constants for Markdown parsing
 const BOLD_MARKER_LENGTH = 2; // For "**"

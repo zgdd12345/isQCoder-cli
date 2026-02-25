@@ -12,7 +12,7 @@ import {
   type Config,
   type ConversationRecord,
   type MessageRecord,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 import * as fs from 'node:fs/promises';
 import path from 'node:path';
 import { stripUnsafeCharacters } from '../ui/utils/textUtils.js';

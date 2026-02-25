@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { Config as CoreConfig } from '@google/gemini-cli-core';
-import { ShellExecutionService, ShellTool } from '@google/gemini-cli-core';
+import type { Config as CoreConfig } from '@isqcoder/isqcoder-cli-core';
+import { ShellExecutionService, ShellTool } from '@isqcoder/isqcoder-cli-core';
 import type {
   AgentShell,
   AgentShellResult,

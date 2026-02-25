@@ -6,12 +6,12 @@
 
 import { useEffect, useReducer, useRef } from 'react';
 import { setTimeout as setTimeoutPromise } from 'node:timers/promises';
-import type { Config, FileSearch } from '@google/gemini-cli-core';
+import type { Config, FileSearch } from '@isqcoder/isqcoder-cli-core';
 import {
   FileSearchFactory,
   escapePath,
   FileDiscoveryService,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 import type { Suggestion } from '../components/SuggestionsDisplay.js';
 import { MAX_SUGGESTIONS_TO_SHOW } from '../components/SuggestionsDisplay.js';
 import { CommandKind } from '../commands/types.js';

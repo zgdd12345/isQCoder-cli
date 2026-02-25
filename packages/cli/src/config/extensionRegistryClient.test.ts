@@ -17,9 +17,9 @@ import {
   ExtensionRegistryClient,
   type RegistryExtension,
 } from './extensionRegistryClient.js';
-import { fetchWithTimeout } from '@google/gemini-cli-core';
+import { fetchWithTimeout } from '@isqcoder/isqcoder-cli-core';
 
-vi.mock('@google/gemini-cli-core', () => ({
+vi.mock('@isqcoder/isqcoder-cli-core', () => ({
   fetchWithTimeout: vi.fn(),
 }));
 

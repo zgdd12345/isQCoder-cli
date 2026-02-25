@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { debugLogger } from '@google/gemini-cli-core';
-import type { Config } from '@google/gemini-cli-core';
+import { debugLogger } from '@isqcoder/isqcoder-cli-core';
+import type { Config } from '@isqcoder/isqcoder-cli-core';
 import WebSocket from 'ws';
 import {
   initActivityLogger,
@@ -19,7 +19,7 @@ interface IDevTools {
   getPort(): number;
 }
 
-const DEVTOOLS_PKG = 'gemini-cli-devtools';
+const DEVTOOLS_PKG = 'isqcoder-devtools';
 const DEFAULT_DEVTOOLS_PORT = 25417;
 const DEFAULT_DEVTOOLS_HOST = '127.0.0.1';
 const MAX_PROMOTION_ATTEMPTS = 3;
@@ -232,7 +232,7 @@ export async function toggleDevToolsPanel(
 
   try {
     const { openBrowserSecurely, shouldLaunchBrowser } = await import(
-      '@google/gemini-cli-core'
+      '@isqcoder/isqcoder-cli-core'
     );
     const url = await startDevToolsServer(config);
     if (shouldLaunchBrowser()) {

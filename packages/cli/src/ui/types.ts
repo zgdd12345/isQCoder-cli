@@ -17,7 +17,7 @@ import {
   type ApprovalMode,
   CoreToolCallStatus,
   checkExhaustive,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 import type { PartListUnion } from '@google/genai';
 import { type ReactNode } from 'react';
 

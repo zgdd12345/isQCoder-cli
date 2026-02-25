@@ -10,7 +10,7 @@ import {
   type ToolResultDisplay,
   debugLogger,
   CoreToolCallStatus,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 import {
   type HistoryItemToolGroup,
   type IndividualToolCallDisplay,

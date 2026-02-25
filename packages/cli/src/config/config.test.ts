@@ -19,10 +19,10 @@ import {
   debugLogger,
   ApprovalMode,
   type MCPServerConfig,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 import { loadCliConfig, parseArguments, type CliArgs } from './config.js';
 import { type Settings, createTestMergedSettings } from './settings.js';
-import * as ServerConfig from '@google/gemini-cli-core';
+import * as ServerConfig from '@isqcoder/isqcoder-cli-core';
 
 import { isWorkspaceTrusted } from './trustedFolders.js';
 import { ExtensionManager } from './extension-manager.js';
@@ -92,9 +92,9 @@ vi.mock('read-package-up', () => ({
   ),
 }));
 
-vi.mock('@google/gemini-cli-core', async () => {
+vi.mock('@isqcoder/isqcoder-cli-core', async () => {
   const actualServer = await vi.importActual<typeof ServerConfig>(
-    '@google/gemini-cli-core',
+    '@isqcoder/isqcoder-cli-core',
   );
   return {
     ...actualServer,

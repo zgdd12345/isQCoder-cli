@@ -13,7 +13,7 @@ import type { FileChangeStats } from '../utils/rewindFileOps.js';
 import type {
   ConversationRecord,
   MessageRecord,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 
 // Mock the dependency
 vi.mock('../utils/rewindFileOps.js', () => ({

@@ -11,8 +11,8 @@ import {
   type Config,
   loadApiKey,
   debugLogger,
-} from '@google/gemini-cli-core';
-import { getErrorMessage } from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
+import { getErrorMessage } from '@isqcoder/isqcoder-cli-core';
 import { AuthState } from '../types.js';
 import { validateAuthMethod } from '../../config/auth.js';
 

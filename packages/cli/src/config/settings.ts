@@ -18,7 +18,7 @@ import {
   coreEvents,
   homedir,
   type AdminControlsSettings,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 import stripJsonComments from 'strip-json-comments';
 import { DefaultLight } from '../ui/themes/default-light.js';
 import { DefaultDark } from '../ui/themes/default.js';
@@ -100,9 +100,9 @@ export function getSystemSettingsPath(): string {
   if (platform() === 'darwin') {
     return '/Library/Application Support/GeminiCli/settings.json';
   } else if (platform() === 'win32') {
-    return 'C:\\ProgramData\\gemini-cli\\settings.json';
+    return 'C:\\ProgramData\\isqcoder\\settings.json';
   } else {
-    return '/etc/gemini-cli/settings.json';
+    return '/etc/isqcoder/settings.json';
   }
 }
 

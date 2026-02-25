@@ -26,7 +26,7 @@ import {
   VALID_GEMINI_MODELS,
   getDisplayString,
   isAutoModel,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 import { useSettings } from '../contexts/SettingsContext.js';
 import type { QuotaStats } from '../types.js';
 import { QuotaStatsInfo } from './QuotaStatsInfo.js';

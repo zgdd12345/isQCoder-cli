@@ -1,11 +1,11 @@
 {
-  "name": "@google/gemini-cli-core",
+  "name": "@isqcoder/isqcoder-cli-core",
   "version": "0.30.0-nightly.20260210.a2174751d",
-  "description": "Gemini CLI Core",
+  "description": "isQCoder CLI Core",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/google-gemini/gemini-cli.git"
+    "url": "git+https://github.com/isQCoder/isQCoder-cli.git"
   },
   "type": "module",
   "main": "dist/index.js",
@@ -91,7 +91,7 @@
     "node-pty": "^1.0.0"
   },
   "devDependencies": {
-    "@google/gemini-cli-test-utils": "file:../test-utils",
+    "@isqcoder/isqcoder-cli-test-utils": "file:../test-utils",
     "@types/fast-levenshtein": "^0.0.4",
     "@types/js-yaml": "^4.0.9",
     "@types/picomatch": "^4.0.1",

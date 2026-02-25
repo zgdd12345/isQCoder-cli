@@ -6,7 +6,7 @@
 
 import { vi, beforeEach, afterEach } from 'vitest';
 import { format } from 'node:util';
-import { coreEvents } from '@google/gemini-cli-core';
+import { coreEvents } from '@isqcoder/isqcoder-cli-core';
 
 global.IS_REACT_ACT_ENVIRONMENT = true;
 

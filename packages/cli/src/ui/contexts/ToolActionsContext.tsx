@@ -19,7 +19,7 @@ import {
   type Config,
   type ToolConfirmationPayload,
   debugLogger,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 import type { IndividualToolCallDisplay } from '../types.js';
 
 interface ToolActionsContextValue {

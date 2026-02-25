@@ -9,7 +9,7 @@ import {
   ApprovalMode,
   type Config,
   getAdminErrorMessage,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 import { useKeypress } from './useKeypress.js';
 import { keyMatchers, Command } from '../keyMatchers.js';
 import type { HistoryItemWithoutId } from '../types.js';

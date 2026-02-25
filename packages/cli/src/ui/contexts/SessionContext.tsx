@@ -18,8 +18,8 @@ import type {
   SessionMetrics,
   ModelMetrics,
   ToolCallStats,
-} from '@google/gemini-cli-core';
-import { uiTelemetryService, sessionId } from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
+import { uiTelemetryService, sessionId } from '@isqcoder/isqcoder-cli-core';
 
 export enum ToolCallDecision {
   ACCEPT = 'accept',

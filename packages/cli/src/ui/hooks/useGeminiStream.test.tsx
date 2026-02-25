@@ -25,7 +25,7 @@ import type {
   Config,
   EditorType,
   AnyToolInvocation,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 import {
   CoreToolCallStatus,
   ApprovalMode,
@@ -39,7 +39,7 @@ import {
   coreEvents,
   CoreEvent,
   MCPDiscoveryState,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 import type { Part, PartListUnion } from '@google/genai';
 import type { UseHistoryManagerReturn } from './useHistoryManager.js';
 import type { SlashCommandProcessorResult } from '../types.js';
@@ -94,7 +94,7 @@ const MockValidationRequiredError = vi.hoisted(
     },
 );
 
-vi.mock('@google/gemini-cli-core', async (importOriginal) => {
+vi.mock('@isqcoder/isqcoder-cli-core', async (importOriginal) => {
   const actualCoreModule = (await importOriginal()) as any;
   return {
     ...actualCoreModule,

@@ -51,7 +51,7 @@ import {
   applyAdminAllowlist,
   getAdminBlockedMcpServersMessage,
   CoreToolCallStatus,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 import { maybeRequestConsentOrFail } from './extensions/consent.js';
 import { resolveEnvVarsInObject } from '../utils/envVarResolver.js';
 import { ExtensionStorage } from './extensions/storage.js';

@@ -7,8 +7,8 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { Box, Text } from 'ink';
 import Spinner from 'ink-spinner';
-import type { Config } from '@google/gemini-cli-core';
-import { debugLogger, spawnAsync, LlmRole } from '@google/gemini-cli-core';
+import type { Config } from '@isqcoder/isqcoder-cli-core';
+import { debugLogger, spawnAsync, LlmRole } from '@isqcoder/isqcoder-cli-core';
 import { useKeypress } from '../../hooks/useKeypress.js';
 import { keyMatchers, Command } from '../../keyMatchers.js';
 import { TextInput } from '../shared/TextInput.js';
@@ -171,7 +171,7 @@ export const TriageIssues = ({
     async (issue: Issue): Promise<AnalysisResult> => {
       const client = config.getBaseLlmClient();
       const prompt = `
-I am triaging GitHub issues for the Gemini CLI project. I need to identify issues that should be closed because they are:
+I am triaging GitHub issues for the isQCoder project. I need to identify issues that should be closed because they are:
 - Bogus (not a real issue/request)
 - Not reproducible (insufficient info, "it doesn't work" without logs/details)
 - Abusive or offensive

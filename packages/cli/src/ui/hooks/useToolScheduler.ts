@@ -14,7 +14,7 @@ import {
   Scheduler,
   type EditorType,
   type ToolCallsUpdateMessage,
-} from '@google/gemini-cli-core';
+} from '@isqcoder/isqcoder-cli-core';
 import { useCallback, useState, useMemo, useEffect, useRef } from 'react';
 
 // Re-exporting types compatible with hook expectations
