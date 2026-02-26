@@ -14,7 +14,11 @@ import {
 } from '../../config/trustedFolders.js';
 import * as process from 'node:process';
 import { type HistoryItemWithoutId, MessageType } from '../types.js';
-import { coreEvents, ExitCodes, isHeadlessMode } from '@isqcoder/isqcoder-cli-core';
+import {
+  coreEvents,
+  ExitCodes,
+  isHeadlessMode,
+} from '@isqcoder/isqcoder-cli-core';
 import { runExitCleanup } from '../../utils/cleanup.js';
 
 export const useFolderTrust = (
@@ -38,7 +42,7 @@ export const useFolderTrust = (
         addItem(
           {
             type: MessageType.INFO,
-            text: 'This folder is untrusted, project settings, hooks, MCPs, and GEMINI.md files will not be applied for this folder.\nUse the `/permissions` command to change the trust level.',
+            text: 'This folder is untrusted, project settings, hooks, MCPs, and ISQCODER.md files will not be applied for this folder.\nUse the `/permissions` command to change the trust level.',
           },
           Date.now(),
         );

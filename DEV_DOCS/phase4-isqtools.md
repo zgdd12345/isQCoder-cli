@@ -188,7 +188,7 @@ RAG 辅助），由 isQCoder-cli 的 LLM 根据诊断结果重新生成 Python �
 - [x] `test_mcp_server.py` — 新增 `TestErrorClassification` 测试类
 - [x] Python 语法校验通过
 
-### 远程服务器执行（运行时验证）
+### 运行时验证（conda isqcoder 环境）
 
 - [ ] `isqtools_run` 能在 Docker 沙箱中执行含 .isq 文件的 Python 代码
 - [ ] `isqtools_auto_fix` isQ 编译错误 → 自动修复 → 重新执行成功

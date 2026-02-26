@@ -27,8 +27,8 @@ export function validateAuthMethodWithSettings(
   if (settings.merged.security.auth.useExternal) {
     return null;
   }
-  // If using Gemini API key, we don't validate it here as we might need to prompt for it.
-  if (authType === AuthType.USE_GEMINI) {
+  // If using Gemini or Zhipu API key, we don't validate it here as we might need to prompt for it.
+  if (authType === AuthType.USE_GEMINI || authType === AuthType.USE_ZHIPU) {
     return null;
   }
   return validateAuthMethod(authType);
@@ -94,6 +94,16 @@ export const useAuthCommand = (
           onAuthError('No authentication method selected.');
         }
         return;
+      }
+
+      if (authType === AuthType.USE_ZHIPU) {
+        if (!process.env['ZHIPU_API_KEY']) {
+          onAuthError(
+            'ZHIPU_API_KEY environment variable is required. Set it in your .env file or shell.',
+          );
+          return;
+        }
+        // Zhipu API key is set, proceed to validation
       }
 
       if (authType === AuthType.USE_GEMINI) {

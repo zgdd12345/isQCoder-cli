@@ -463,6 +463,17 @@ export async function start_sandbox(
       args.push('--env', `GOOGLE_API_KEY=${process.env['GOOGLE_API_KEY']}`);
     }
 
+    // copy ZHIPU_API_KEY(s)
+    if (process.env['ZHIPU_API_KEY']) {
+      args.push('--env', `ZHIPU_API_KEY=${process.env['ZHIPU_API_KEY']}`);
+    }
+    if (process.env['ZHIPU_API_BASE_URL']) {
+      args.push(
+        '--env',
+        `ZHIPU_API_BASE_URL=${process.env['ZHIPU_API_BASE_URL']}`,
+      );
+    }
+
     // copy GOOGLE_GEMINI_BASE_URL and GOOGLE_VERTEX_BASE_URL
     if (process.env['GOOGLE_GEMINI_BASE_URL']) {
       args.push(

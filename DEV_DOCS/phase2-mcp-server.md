@@ -41,22 +41,9 @@ isqcoder-mcp-server (Python)
 
 ---
 
-## 2.2 运行环境说明
+## 2.2 MCP Server 实现
 
-> [!IMPORTANT] **本地 vs 远程分工**
->
-> - **本地开发机** — 仅进行代码编写、语法检查和静态分析
-> - **远程服务器** — Python 虚拟环境创建、依赖安装、MCP
->   Server 启动运行、Docker 容器执行（isQ 编译/模拟）、端到端集成测试
->
-> MCP Server 和 Docker 沙箱均需要远程服务器环境支持，不在本地执行。
-
----
-
-## 2.3 MCP Server 实现
-
-> [!NOTE] **前置条件:** Phase 0 中已完成 `mcp-python-sdk`
-> 安装和兼容性验证（远程服务器）。
+> [!NOTE] **前置条件:** Phase 0 中已完成 `mcp-python-sdk` 安装和兼容性验证。
 
 ### 实现文件结构
 
@@ -78,7 +65,7 @@ src/isq_agent/mcp_server/
 4. **错误降级**: RAG 检索等可选组件初始化失败时 graceful fallback
 5. **日志隔离**: stdio 模式下日志写入 stderr，不干扰 MCP 协议通信
 
-### 启动方式（远程服务器上执行）
+### 启动方式
 
 ```bash
 # 标准 stdio 模式（用于 isQCoder-cli 配置）
@@ -93,7 +80,7 @@ python -m isq_agent.mcp_server --log-level DEBUG
 
 ---
 
-## 2.4 MCP Tools 详细定义
+## 2.3 MCP Tools 详细定义
 
 | MCP Tool          | 输入                     | 输出                                     | 复用 isQCodeAgent 组件               |
 | ----------------- | ------------------------ | ---------------------------------------- | ------------------------------------ |
@@ -108,7 +95,7 @@ python -m isq_agent.mcp_server --log-level DEBUG
 
 ---
 
-## 2.5 isQCoder-cli 侧 MCP 配置
+## 2.4 isQCoder-cli 侧 MCP 配置
 
 在 `~/.isqcoder/settings.json` 中配置 MCP Server：
 
@@ -118,7 +105,7 @@ python -m isq_agent.mcp_server --log-level DEBUG
     "isqcoder": {
       "command": "python",
       "args": ["-m", "isq_agent.mcp_server"],
-      "cwd": "/path/to/isQCodeAgent",
+      "cwd": "/home/alba/Project/isQCoder/isQCodeAgent",
       "env": {
         "LLM_PROVIDER": "zhipu",
         "ISQC_DOCKER_IMAGE": "isqc-python:latest"
@@ -132,7 +119,7 @@ python -m isq_agent.mcp_server --log-level DEBUG
 
 ---
 
-## 2.6 快速路径集成
+## 2.5 快速路径集成
 
 将 isQCodeAgent 的 11 个快速路径模板通过 MCP 暴露：
 
@@ -150,7 +137,7 @@ isQCodeAgent fast_path.py → 匹配 "bell_state" 模板
 
 ---
 
-## 2.7 依赖变更
+## 2.6 依赖变更
 
 ### 新增依赖
 
@@ -178,9 +165,9 @@ isQCodeAgent fast_path.py → 匹配 "bell_state" 模板
 - [x] `DEV_DOCS/examples/mcp-settings.example.json` — 配置示例
 - [x] Python 语法校验通过（`ast.parse`）
 
-### 远程服务器执行（运行时验证）
+### 运行时验证
 
-- [ ] 创建 Python 虚拟环境并安装全部依赖（含 `mcp`）
+- [ ] 创建 conda `isqcoder` 环境并安装全部依赖（含 `mcp`）
 - [ ] `python -m isq_agent.mcp_server` 可正常启动
 - [ ] `pytest tests/test_mcp_server.py` 单元测试通过
 - [ ] Docker 镜像可用，`isq_compile` / `isq_simulate` tools 可正常调用

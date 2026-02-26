@@ -25,6 +25,7 @@ import { parseCustomHeaders } from '../utils/customHeaderUtils.js';
 import { RecordingContentGenerator } from './recordingContentGenerator.js';
 import { getVersion, resolveModel } from '../../index.js';
 import type { LlmRole } from '../telemetry/llmRole.js';
+import { ZhipuContentGenerator } from './zhipuContentGenerator.js';
 
 /**
  * Interface abstracting the core functionalities for generating content and counting tokens.
@@ -55,6 +56,7 @@ export enum AuthType {
   LOGIN_WITH_GOOGLE = 'oauth-personal',
   USE_GEMINI = 'gemini-api-key',
   USE_VERTEX_AI = 'vertex-ai',
+  USE_ZHIPU = 'zhipu-api-key',
   LEGACY_CLOUD_SHELL = 'cloud-shell',
   COMPUTE_ADC = 'compute-default-credentials',
 }
@@ -65,7 +67,8 @@ export enum AuthType {
  * Checks in order:
  * 1. GOOGLE_GENAI_USE_GCA=true -> LOGIN_WITH_GOOGLE
  * 2. GOOGLE_GENAI_USE_VERTEXAI=true -> USE_VERTEX_AI
- * 3. GEMINI_API_KEY -> USE_GEMINI
+ * 3. ZHIPU_API_KEY -> USE_ZHIPU
+ * 4. GEMINI_API_KEY -> USE_GEMINI
  */
 export function getAuthTypeFromEnv(): AuthType | undefined {
   if (process.env['GOOGLE_GENAI_USE_GCA'] === 'true') {
@@ -73,6 +76,9 @@ export function getAuthTypeFromEnv(): AuthType | undefined {
   }
   if (process.env['GOOGLE_GENAI_USE_VERTEXAI'] === 'true') {
     return AuthType.USE_VERTEX_AI;
+  }
+  if (process.env['ZHIPU_API_KEY']) {
+    return AuthType.USE_ZHIPU;
   }
   if (process.env['GEMINI_API_KEY']) {
     return AuthType.USE_GEMINI;
@@ -94,6 +100,7 @@ export async function createContentGeneratorConfig(
   const geminiApiKey =
     process.env['GEMINI_API_KEY'] || (await loadApiKey()) || undefined;
   const googleApiKey = process.env['GOOGLE_API_KEY'] || undefined;
+  const zhipuApiKey = process.env['ZHIPU_API_KEY'] || undefined;
   const googleCloudProject =
     process.env['GOOGLE_CLOUD_PROJECT'] ||
     process.env['GOOGLE_CLOUD_PROJECT_ID'] ||
@@ -110,6 +117,13 @@ export async function createContentGeneratorConfig(
     authType === AuthType.LOGIN_WITH_GOOGLE ||
     authType === AuthType.COMPUTE_ADC
   ) {
+    return contentGeneratorConfig;
+  }
+
+  if (authType === AuthType.USE_ZHIPU && zhipuApiKey) {
+    contentGeneratorConfig.apiKey = zhipuApiKey;
+    contentGeneratorConfig.vertexai = false;
+
     return contentGeneratorConfig;
   }
 
@@ -182,6 +196,16 @@ export async function createContentGenerator(
         ),
         gcConfig,
       );
+    }
+
+    if (config.authType === AuthType.USE_ZHIPU) {
+      if (!config.apiKey) {
+        throw new Error(
+          'ZHIPU_API_KEY is required when using Zhipu API authentication.',
+        );
+      }
+      const zhipuGenerator = new ZhipuContentGenerator(config.apiKey);
+      return new LoggingContentGenerator(zhipuGenerator, gcConfig);
     }
 
     if (

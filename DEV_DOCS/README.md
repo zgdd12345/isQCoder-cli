@@ -78,24 +78,23 @@ isQCodeAgent (独立 Python 项目 — 作为 MCP Server 集成)
 
 | 阶段        | 名称                           | 预计工期 | 状态      | 详细文档                                         |
 | ----------- | ------------------------------ | -------- | --------- | ------------------------------------------------ |
-| **Phase 0** | 预备阶段                       | 1 周     | 🟡 进行中 | [phase0-preparation.md](./phase0-preparation.md) |
-| **Phase 1** | 品牌体系完整替换               | 1–2 周   | ⬜ 未开始 | [phase1-branding.md](./phase1-branding.md)       |
-| **Phase 2** | isQCodeAgent → MCP Server 封装 | 2–3 周   | 🟡 进行中 | [phase2-mcp-server.md](./phase2-mcp-server.md)   |
+| **Phase 0** | 预备阶段                       | 1 周     | ✅ 已完成 | [phase0-preparation.md](./phase0-preparation.md) |
+| **Phase 1** | 品牌体系完整替换               | 1–2 周   | ✅ 已完成 | [phase1-branding.md](./phase1-branding.md)       |
+| **Phase 2** | isQCodeAgent → MCP Server 封装 | 2–3 周   | ✅ 已完成 | [phase2-mcp-server.md](./phase2-mcp-server.md)   |
 | **Phase 3** | 量子计算知识增强               | 2–3 周   | ✅ 已完成 | [phase3-knowledge.md](./phase3-knowledge.md)     |
-| **Phase 4** | isqtools Python 调用链         | 2–3 周   | 🟡 进行中 | [phase4-isqtools.md](./phase4-isqtools.md)       |
-| **Phase 5** | 开发体验优化                   | 2–3 周   | ⬜ 未开始 | [phase5-ux.md](./phase5-ux.md)                   |
+| **Phase 4** | isqtools Python 调用链         | 2–3 周   | ✅ 已完成 | [phase4-isqtools.md](./phase4-isqtools.md)       |
+| **Phase 5** | 开发体验优化                   | 2–3 周   | ✅ 已完成 | [phase5-ux.md](./phase5-ux.md)                   |
 | **Phase 6** | 质量保障与发布                 | 2 周     | ⬜ 未开始 | [phase6-release.md](./phase6-release.md)         |
 
 **预计总工期:** 11–15 周（含 Phase 0 预备阶段）
 
 **状态说明:** ⬜ 未开始 | 🟡 进行中 | ✅ 已完成 | ⏸️ 暂停
 
-> [!NOTE] **开发环境分工**
+> [!NOTE] **开发环境**
 >
-> - **本地开发机** — 代码编写、语法检查、静态分析、TypeScript 构建
-> - **远程服务器** — Python 虚拟环境、Docker 容器、MCP Server 运行时、集成测试
->
-> 涉及 Python 运行时、Docker 和 MCP Server 启动的验证操作均在远程服务器上执行。
+> 统一在 **Linux 工作站**
+> (`/home/alba/Project/isQCoder/`) 上完成所有开发、构建、测试和运行操作（TypeScript 构建 +
+> Python 运行时 + Docker 沙箱）。
 
 ---
 

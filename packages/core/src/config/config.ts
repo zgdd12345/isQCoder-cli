@@ -1072,7 +1072,8 @@ export class Config {
     const authType = this.contentGeneratorConfig.authType;
     if (
       authType === AuthType.USE_GEMINI ||
-      authType === AuthType.USE_VERTEX_AI
+      authType === AuthType.USE_VERTEX_AI ||
+      authType === AuthType.USE_ZHIPU
     ) {
       this.setHasAccessToPreviewModel(true);
     }

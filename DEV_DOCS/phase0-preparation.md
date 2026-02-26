@@ -1,7 +1,8 @@
 # Phase 0: 预备阶段
 
 > **目标:** 确保开发环境就绪、关键外部依赖可用 **预计工期:** 1 周 **状态:**
-> 🟡 进行中 **最后更新:** 2026-02-25 **返回:** [主开发文档](./README.md)
+> 🟡 进行中 **最后更新:** 2026-02-25 **环境:** Linux 工作站 **返回:**
+> [主开发文档](./README.md)
 
 ---
 
@@ -34,22 +35,19 @@
 ## 0.2 MCP Python SDK 兼容性验证
 
 ```bash
-cd ../isQCodeAgent
-python3 -m venv .venv
-source .venv/bin/activate
-pip install mcp  # 安装 mcp-python-sdk
+conda activate isqcoder
+cd /home/alba/Project/isQCoder/isQCodeAgent
+pip install -r requirements.txt -e .
 python -c "from mcp.server import Server; print('MCP SDK OK')"
 ```
 
 - 确认 `mcp-python-sdk` 与 isQCodeAgent 的 Python 3.10+ / LangGraph /
   LangChain 依赖无冲突
-- 将 `mcp` 添加到 `requirements.txt` 或 `pyproject.toml`
+- `mcp>=1.0.0` 已在 `requirements.txt` 中
 
-**当前状态:** ⬜ 待在远程服务器执行
+**当前状态:** ⬜ 待执行
 
-> **备注:** isQCodeAgent (`/Users/fsm/project/isQCoder/isQCodeAgent`) 尚无
-> `.venv`，`requirements.txt` 中尚未包含 `mcp`
-> 依赖。需在远程开发服务器上创建虚拟环境并验证兼容性。
+> **备注:** 使用 conda `isqcoder` 虚拟环境。
 
 ---
 
@@ -59,14 +57,13 @@ python -c "from mcp.server import Server; print('MCP SDK OK')"
 - 验证 isqtools 在镜像中可正常 import 和执行
 - 确保 CI 环境可以 pull 镜像
 
-**当前状态:** ⬜ 待在远程服务器执行
+**当前状态:** ⬜ 待执行
 
-> **备注:**
-> Docker 镜像将在远程服务器上部署和验证，不在本地开发机上执行。基础镜像为
+> **备注:** 基础镜像为
 > `arclightquantum/isqc:ubuntu-0.0.1`，自定义 Dockerfile 位于
 > `isQCodeAgent/docker/Dockerfile.isq`。
 
-**远程服务器验证步骤:**
+**验证步骤:**
 
 ```bash
 # 1. 拉取基础镜像
@@ -80,6 +77,7 @@ docker run --rm arclightquantum/isqc:ubuntu-0.0.1 \
     python3 -c "import isqtools; print('isqtools OK')"
 
 # 4. 如需构建自定义镜像
+cd /home/alba/Project/isQCoder/isQCodeAgent
 docker build -t isq-sandbox:latest -f docker/Dockerfile.isq .
 ```
 
@@ -136,8 +134,8 @@ upstream/main: 领先基线 ~291 commits
 ## 验证清单
 
 - [ ] npm `@isqcoder` organization 已创建
-- [ ] `mcp-python-sdk` 在 isQCodeAgent 虚拟环境中安装成功（远程服务器）
-- [ ] `arclightquantum/isqc:ubuntu-0.0.1` Docker 镜像可用（远程服务器）
+- [ ] `mcp-python-sdk` 在 isQCodeAgent 虚拟环境中安装成功
+- [ ] `arclightquantum/isqc:ubuntu-0.0.1` Docker 镜像可用
 - [ ] `npm run preflight` 在当前代码上通过
 - [x] `upstream` remote 已添加并 fetch
 - [x] `upstream` 跟踪分支已创建 @ 基线 tag

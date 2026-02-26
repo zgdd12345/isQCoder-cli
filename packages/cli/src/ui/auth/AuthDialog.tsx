@@ -72,6 +72,11 @@ export function AuthDialog({
       key: AuthType.USE_GEMINI,
     },
     {
+      label: 'Use Zhipu API Key (智谱 GLM)',
+      value: AuthType.USE_ZHIPU,
+      key: AuthType.USE_ZHIPU,
+    },
+    {
       label: 'Vertex AI',
       value: AuthType.USE_VERTEX_AI,
       key: AuthType.USE_VERTEX_AI,
@@ -102,6 +107,10 @@ export function AuthDialog({
 
     if (defaultAuthType) {
       return item.value === defaultAuthType;
+    }
+
+    if (process.env['ZHIPU_API_KEY']) {
+      return item.value === AuthType.USE_ZHIPU;
     }
 
     if (process.env['GEMINI_API_KEY']) {
@@ -140,6 +149,18 @@ export function AuthDialog({
           return;
         }
 
+        if (authType === AuthType.USE_ZHIPU) {
+          if (process.env['ZHIPU_API_KEY'] !== undefined) {
+            setAuthState(AuthState.Unauthenticated);
+            return;
+          } else {
+            onAuthError(
+              'ZHIPU_API_KEY environment variable is required. Set it in your .env file or shell.',
+            );
+            return;
+          }
+        }
+
         if (authType === AuthType.USE_GEMINI) {
           if (process.env['GEMINI_API_KEY'] !== undefined) {
             setAuthState(AuthState.Unauthenticated);
@@ -152,7 +173,7 @@ export function AuthDialog({
       }
       setAuthState(AuthState.Unauthenticated);
     },
-    [settings, config, setAuthState, exiting, setAuthContext],
+    [settings, config, setAuthState, exiting, setAuthContext, onAuthError],
   );
 
   const handleAuthSelect = (authMethod: AuthType) => {

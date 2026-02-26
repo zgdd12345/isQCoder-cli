@@ -27,6 +27,10 @@ import { isAlternateBufferEnabled } from '../hooks/useAlternateBuffer.js';
 // Configure theming and parsing utilities.
 const lowlight = createLowlight(common);
 
+// Register isQ quantum language for syntax highlighting
+import { isqLanguage } from './isqLanguage.js';
+lowlight.register('isq', isqLanguage);
+
 function renderHastNode(
   node: Root | Element | HastText | RootContent,
   theme: Theme,

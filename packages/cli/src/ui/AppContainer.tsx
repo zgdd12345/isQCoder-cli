@@ -920,7 +920,7 @@ Logging in with Google... Restarting isQCoder to continue.
     historyManager.addItem(
       {
         type: MessageType.INFO,
-        text: 'Refreshing hierarchical memory (GEMINI.md or other context files)...',
+        text: 'Refreshing hierarchical memory (ISQCODER.md or other context files)...',
       },
       Date.now(),
     );
