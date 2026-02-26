@@ -97,7 +97,7 @@ describe('createPolicyEngineConfig', () => {
           typeof path === 'string' &&
           nodePath
             .normalize(path)
-            .includes(nodePath.normalize('.gemini/policies'))
+            .includes(nodePath.normalize('.isqcoder/policies'))
         ) {
           // Return empty array for user policies
           return [] as unknown as Awaited<ReturnType<typeof actualFs.readdir>>;
@@ -644,7 +644,7 @@ describe('createPolicyEngineConfig', () => {
           typeof path === 'string' &&
           nodePath
             .normalize(path)
-            .includes(nodePath.normalize('.gemini/policies'))
+            .includes(nodePath.normalize('.isqcoder/policies'))
         ) {
           return [
             {
@@ -670,7 +670,7 @@ describe('createPolicyEngineConfig', () => {
           typeof path === 'string' &&
           nodePath
             .normalize(path)
-            .includes(nodePath.normalize('.gemini/policies/write.toml'))
+            .includes(nodePath.normalize('.isqcoder/policies/write.toml'))
         ) {
           return `
 [[rule]]
@@ -693,7 +693,7 @@ priority = 150
           typeof path === 'string' &&
           nodePath
             .normalize(path)
-            .includes(nodePath.normalize('.gemini/policies'))
+            .includes(nodePath.normalize('.isqcoder/policies'))
         ) {
           return {
             isDirectory: () => true,
@@ -760,7 +760,7 @@ priority = 150
           typeof path === 'string' &&
           nodePath
             .normalize(path)
-            .includes(nodePath.normalize('.gemini/policies'))
+            .includes(nodePath.normalize('.isqcoder/policies'))
         ) {
           return [
             {
@@ -786,7 +786,7 @@ priority = 150
           typeof path === 'string' &&
           nodePath
             .normalize(path)
-            .includes(nodePath.normalize('.gemini/policies/safety.toml'))
+            .includes(nodePath.normalize('.isqcoder/policies/safety.toml'))
         ) {
           return `
 [[rule]]
@@ -822,7 +822,7 @@ required_context = ["environment"]
           typeof path === 'string' &&
           nodePath
             .normalize(path)
-            .includes(nodePath.normalize('.gemini/policies'))
+            .includes(nodePath.normalize('.isqcoder/policies'))
         ) {
           return {
             isDirectory: () => true,
@@ -887,7 +887,7 @@ required_context = ["environment"]
           typeof path === 'string' &&
           nodePath
             .normalize(path)
-            .includes(nodePath.normalize('.gemini/policies'))
+            .includes(nodePath.normalize('.isqcoder/policies'))
         ) {
           return [
             {
@@ -914,7 +914,7 @@ required_context = ["environment"]
           nodePath
             .normalize(path)
             .includes(
-              nodePath.normalize('.gemini/policies/invalid_safety.toml'),
+              nodePath.normalize('.isqcoder/policies/invalid_safety.toml'),
             )
         ) {
           return `
@@ -944,7 +944,7 @@ name = "invalid-name"
           typeof path === 'string' &&
           nodePath
             .normalize(path)
-            .includes(nodePath.normalize('.gemini/policies'))
+            .includes(nodePath.normalize('.isqcoder/policies'))
         ) {
           return {
             isDirectory: () => true,

@@ -6,7 +6,11 @@
 
 import { useState, useCallback, useRef, useEffect, useMemo } from 'react';
 import type { Config } from '@isqcoder/isqcoder-cli-core';
-import { debugLogger, getResponseText, LlmRole } from '@isqcoder/isqcoder-cli-core';
+import {
+  debugLogger,
+  getResponseText,
+  LlmRole,
+} from '@isqcoder/isqcoder-cli-core';
 import type { Content } from '@google/genai';
 import type { TextBuffer } from '../components/shared/text-buffer.js';
 import { isSlashCommand } from '../utils/commandUtils.js';

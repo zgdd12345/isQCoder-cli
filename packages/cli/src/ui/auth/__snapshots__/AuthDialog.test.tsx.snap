@@ -7,13 +7,14 @@ exports[`AuthDialog > Snapshots > renders correctly with auth error 1`] = `
 │                                                                                                                      │
 │   How would you like to authenticate for this project?                                                               │
 │                                                                                                                      │
-│   (selected) Login with Google(not selected) Use Gemini API Key(not selected) Vertex AI                              │
+│   (selected) Login with   (not selected) Use Gemini API (not selected) Use Zhipu API Key (智谱(not selected) Vertex  │
+│   Google                  Key                           GLM)                                  AI                     │
 │                                                                                                                      │
 │   Something went wrong                                                                                               │
 │                                                                                                                      │
 │   (Use Enter to select)                                                                                              │
 │                                                                                                                      │
-│   Terms of Services and Privacy Notice for Gemini CLI                                                                │
+│   Terms of Services and Privacy Notice for isQCoder                                                                  │
 │                                                                                                                      │
 │   https://github.com/google-gemini/gemini-cli/blob/main/docs/tos-privacy.md                                          │
 │                                                                                                                      │
@@ -27,11 +28,12 @@ exports[`AuthDialog > Snapshots > renders correctly with default props 1`] = `
 │                                                                                                                      │
 │   How would you like to authenticate for this project?                                                               │
 │                                                                                                                      │
-│   (selected) Login with Google(not selected) Use Gemini API Key(not selected) Vertex AI                              │
+│   (selected) Login with   (not selected) Use Gemini API (not selected) Use Zhipu API Key (智谱(not selected) Vertex  │
+│   Google                  Key                           GLM)                                  AI                     │
 │                                                                                                                      │
 │   (Use Enter to select)                                                                                              │
 │                                                                                                                      │
-│   Terms of Services and Privacy Notice for Gemini CLI                                                                │
+│   Terms of Services and Privacy Notice for isQCoder                                                                  │
 │                                                                                                                      │
 │   https://github.com/google-gemini/gemini-cli/blob/main/docs/tos-privacy.md                                          │
 │                                                                                                                      │
@@ -49,7 +51,7 @@ exports[`AuthDialog > Snapshots > renders correctly with enforced auth type 1`] 
 │                                                                                                                      │
 │   (Use Enter to select)                                                                                              │
 │                                                                                                                      │
-│   Terms of Services and Privacy Notice for Gemini CLI                                                                │
+│   Terms of Services and Privacy Notice for isQCoder                                                                  │
 │                                                                                                                      │
 │   https://github.com/google-gemini/gemini-cli/blob/main/docs/tos-privacy.md                                          │
 │                                                                                                                      │

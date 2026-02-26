@@ -8,7 +8,10 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { renderHook } from '../../test-utils/render.js';
 import { useTurnActivityMonitor } from './useTurnActivityMonitor.js';
 import { StreamingState } from '../types.js';
-import { hasRedirection, CoreToolCallStatus } from '@isqcoder/isqcoder-cli-core';
+import {
+  hasRedirection,
+  CoreToolCallStatus,
+} from '@isqcoder/isqcoder-cli-core';
 import { type TrackedToolCall } from './useToolScheduler.js';
 
 vi.mock('@isqcoder/isqcoder-cli-core', async (importOriginal) => {

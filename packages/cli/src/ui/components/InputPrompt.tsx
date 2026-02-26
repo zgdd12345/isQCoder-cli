@@ -39,7 +39,11 @@ import { useKeypress } from '../hooks/useKeypress.js';
 import { keyMatchers, Command } from '../keyMatchers.js';
 import type { CommandContext, SlashCommand } from '../commands/types.js';
 import type { Config } from '@isqcoder/isqcoder-cli-core';
-import { ApprovalMode, coreEvents, debugLogger } from '@isqcoder/isqcoder-cli-core';
+import {
+  ApprovalMode,
+  coreEvents,
+  debugLogger,
+} from '@isqcoder/isqcoder-cli-core';
 import {
   parseInputForHighlighting,
   parseSegmentsFromTokens,

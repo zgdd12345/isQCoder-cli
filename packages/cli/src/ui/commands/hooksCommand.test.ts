@@ -9,7 +9,11 @@ import { hooksCommand } from './hooksCommand.js';
 import { createMockCommandContext } from '../../test-utils/mockCommandContext.js';
 import { MessageType } from '../types.js';
 import type { HookRegistryEntry } from '@isqcoder/isqcoder-cli-core';
-import { HookType, HookEventName, ConfigSource } from '@isqcoder/isqcoder-cli-core';
+import {
+  HookType,
+  HookEventName,
+  ConfigSource,
+} from '@isqcoder/isqcoder-cli-core';
 import type { CommandContext } from './types.js';
 import { SettingScope } from '../../config/settings.js';
 

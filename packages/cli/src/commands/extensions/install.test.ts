@@ -16,7 +16,10 @@ import {
 } from 'vitest';
 import { handleInstall, installCommand } from './install.js';
 import yargs from 'yargs';
-import { debugLogger, type GeminiCLIExtension } from '@isqcoder/isqcoder-cli-core';
+import {
+  debugLogger,
+  type GeminiCLIExtension,
+} from '@isqcoder/isqcoder-cli-core';
 import type {
   ExtensionManager,
   inferInstallMetadata,

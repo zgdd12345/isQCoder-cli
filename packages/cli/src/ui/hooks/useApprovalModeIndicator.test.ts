@@ -26,7 +26,9 @@ import { MessageType } from '../types.js';
 vi.mock('./useKeypress.js');
 
 vi.mock('@isqcoder/isqcoder-cli-core', async () => {
-  const actualServerModule = await vi.importActual('@isqcoder/isqcoder-cli-core');
+  const actualServerModule = await vi.importActual(
+    '@isqcoder/isqcoder-cli-core',
+  );
   return {
     ...actualServerModule,
     Config: vi.fn(),

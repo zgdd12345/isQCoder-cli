@@ -113,7 +113,7 @@ describe('activate', () => {
     } as vscode.Extension<unknown>);
     await activate(context);
     expect(showInformationMessageMock).toHaveBeenCalledWith(
-      'Gemini CLI Companion extension successfully installed.',
+      'isQCoder Companion extension successfully installed.',
     );
   });
 
@@ -141,7 +141,7 @@ describe('activate', () => {
     } as vscode.Extension<unknown>);
     await activate(context);
     expect(showInformationMessageMock).toHaveBeenCalledWith(
-      'Gemini CLI Companion extension successfully installed.',
+      'isQCoder Companion extension successfully installed.',
     );
   });
 
@@ -174,7 +174,7 @@ describe('activate', () => {
       await activate(context);
 
       expect(showInformationMessageMock).toHaveBeenCalledWith(
-        'A new version (1.2.0) of the Gemini CLI Companion extension is available.',
+        'A new version (1.2.0) of the isQCoder Companion extension is available.',
         'Update to latest version',
       );
     });

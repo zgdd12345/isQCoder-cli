@@ -77,7 +77,7 @@ describe('FolderTrustDialog', () => {
       <FolderTrustDialog onSelect={vi.fn()} isRestarting={true} />,
     );
 
-    expect(lastFrame()).toContain('Gemini CLI is restarting');
+    expect(lastFrame()).toContain('isQCoder is restarting');
     unmount();
   });
 

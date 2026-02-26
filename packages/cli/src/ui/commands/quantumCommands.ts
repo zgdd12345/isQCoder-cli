@@ -309,7 +309,15 @@ export const qtemplateCommand: SlashCommand = {
       ],
     };
   },
-  completion: async (): Promise<string[]> => ['bell', 'ghz', 'hadamard', 'cnot', 'teleport', 'grover', 'qft'],
+  completion: async (): Promise<string[]> => [
+    'bell',
+    'ghz',
+    'hadamard',
+    'cnot',
+    'teleport',
+    'grover',
+    'qft',
+  ],
   showCompletionLoading: false,
 };
 

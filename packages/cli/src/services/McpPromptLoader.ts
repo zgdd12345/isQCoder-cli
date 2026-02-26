@@ -5,7 +5,10 @@
  */
 
 import type { Config } from '@isqcoder/isqcoder-cli-core';
-import { getErrorMessage, getMCPServerPrompts } from '@isqcoder/isqcoder-cli-core';
+import {
+  getErrorMessage,
+  getMCPServerPrompts,
+} from '@isqcoder/isqcoder-cli-core';
 import type {
   CommandContext,
   SlashCommand,

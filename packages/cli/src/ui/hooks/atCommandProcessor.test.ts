@@ -7,7 +7,10 @@
 import type { Mock } from 'vitest';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { handleAtCommand } from './atCommandProcessor.js';
-import type { Config, DiscoveredMCPResource } from '@isqcoder/isqcoder-cli-core';
+import type {
+  Config,
+  DiscoveredMCPResource,
+} from '@isqcoder/isqcoder-cli-core';
 import {
   FileDiscoveryService,
   GlobTool,

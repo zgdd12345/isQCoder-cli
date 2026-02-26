@@ -23,7 +23,11 @@ import { FolderTrustChoice } from '../components/FolderTrustDialog.js';
 import type { LoadedTrustedFolders } from '../../config/trustedFolders.js';
 import { TrustLevel } from '../../config/trustedFolders.js';
 import * as trustedFolders from '../../config/trustedFolders.js';
-import { coreEvents, ExitCodes, isHeadlessMode } from '@isqcoder/isqcoder-cli-core';
+import {
+  coreEvents,
+  ExitCodes,
+  isHeadlessMode,
+} from '@isqcoder/isqcoder-cli-core';
 import { MessageType } from '../types.js';
 
 const mockedCwd = vi.hoisted(() => vi.fn());
@@ -151,7 +155,7 @@ describe('useFolderTrust', () => {
     renderHook(() => useFolderTrust(mockSettings, onTrustChange, addItem));
     expect(addItem).toHaveBeenCalledWith(
       {
-        text: 'This folder is untrusted, project settings, hooks, MCPs, and GEMINI.md files will not be applied for this folder.\nUse the `/permissions` command to change the trust level.',
+        text: 'This folder is untrusted, project settings, hooks, MCPs, and ISQCODER.md files will not be applied for this folder.\nUse the `/permissions` command to change the trust level.',
         type: 'info',
       },
       expect.any(Number),
@@ -351,7 +355,7 @@ describe('useFolderTrust', () => {
 
     expect(emitFeedbackSpy).toHaveBeenCalledWith(
       'error',
-      'Failed to save trust settings. Exiting Gemini CLI.',
+      'Failed to save trust settings. Exiting isQCoder.',
     );
     expect(mockedExit).toHaveBeenCalledWith(ExitCodes.FATAL_CONFIG_ERROR);
   });

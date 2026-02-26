@@ -252,6 +252,8 @@ function contentsToMessages(
 function toolsToOpenAI(tools?: unknown): OpenAITool[] | undefined {
   if (!tools || !Array.isArray(tools) || tools.length === 0) return undefined;
 
+  const openaiTools: OpenAITool[] = [];
+
   // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   for (const tool of tools as Tool[]) {
     if (

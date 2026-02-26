@@ -26,7 +26,8 @@ vi.mock('node:os', async (importOriginal) => {
 
 // Mock @isqcoder/isqcoder-cli-core
 vi.mock('@isqcoder/isqcoder-cli-core', async (importOriginal) => {
-  const core = await importOriginal<typeof import('@isqcoder/isqcoder-cli-core')>();
+  const core =
+    await importOriginal<typeof import('@isqcoder/isqcoder-cli-core')>();
   return {
     ...core,
     homedir: mockHomedir,

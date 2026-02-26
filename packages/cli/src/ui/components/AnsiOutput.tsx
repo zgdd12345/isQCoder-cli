@@ -6,7 +6,11 @@
 
 import type React from 'react';
 import { Box, Text } from 'ink';
-import type { AnsiLine, AnsiOutput, AnsiToken } from '@isqcoder/isqcoder-cli-core';
+import type {
+  AnsiLine,
+  AnsiOutput,
+  AnsiToken,
+} from '@isqcoder/isqcoder-cli-core';
 
 const DEFAULT_HEIGHT = 24;
 

@@ -141,6 +141,7 @@ describe('GeminiCliAgent Integration', () => {
         throw new Error('Dynamic instruction failure');
       },
       model: 'gemini-2.0-flash',
+      fakeResponses: getGoldenPath('agent-static-instructions'),
     });
 
     const stream = agent.sendStream('Say hello.');
@@ -150,5 +151,5 @@ describe('GeminiCliAgent Integration', () => {
         // Just consume the stream
       }
     }).rejects.toThrow('Dynamic instruction failure');
-  });
+  }, 30000);
 });

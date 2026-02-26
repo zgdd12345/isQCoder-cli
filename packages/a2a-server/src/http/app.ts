@@ -25,7 +25,10 @@ import { loadConfig, loadEnvironment, setTargetDir } from '../config/config.js';
 import { loadSettings } from '../config/settings.js';
 import { loadExtensions } from '../config/extension.js';
 import { commandRegistry } from '../commands/command-registry.js';
-import { debugLogger, SimpleExtensionLoader } from '@isqcoder/isqcoder-cli-core';
+import {
+  debugLogger,
+  SimpleExtensionLoader,
+} from '@isqcoder/isqcoder-cli-core';
 import type { Command, CommandArgument } from '../commands/types.js';
 import { GitService } from '@isqcoder/isqcoder-cli-core';
 

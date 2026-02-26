@@ -9,7 +9,11 @@ import type {
   IndividualToolCallDisplay,
 } from '../types.js';
 import { useCallback, useReducer, useRef, useEffect } from 'react';
-import type { AnsiOutput, Config, GeminiClient } from '@isqcoder/isqcoder-cli-core';
+import type {
+  AnsiOutput,
+  Config,
+  GeminiClient,
+} from '@isqcoder/isqcoder-cli-core';
 import {
   isBinary,
   ShellExecutionService,

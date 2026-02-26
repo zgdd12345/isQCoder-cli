@@ -13,7 +13,10 @@ import type {
   LoadedSettings,
 } from '../../config/settings.js';
 import { SettingScope } from '../../config/settings.js';
-import type { AgentDefinition, AgentOverride } from '@isqcoder/isqcoder-cli-core';
+import type {
+  AgentDefinition,
+  AgentOverride,
+} from '@isqcoder/isqcoder-cli-core';
 import { getCachedStringWidth } from '../utils/textUtils.js';
 import {
   BaseSettingsDialog,

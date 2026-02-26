@@ -39,7 +39,7 @@ describe('computeTerminalTitle', () => {
         showThoughts: true,
         useDynamicTitle: false,
       } as TerminalTitleOptions,
-      expected: 'Gemini CLI (my-project)'.padEnd(80, ' '),
+      expected: 'isQCoder (my-project)'.padEnd(80, ' '),
       exact: true,
     },
     {
@@ -234,7 +234,7 @@ describe('computeTerminalTitle', () => {
     });
 
     expect(title.length).toBe(80);
-    expect(title).toContain('Gemini CLI (CCCCC');
+    expect(title).toContain('isQCoder (CCCCC');
     expect(title).toContain('…)');
   });
 });

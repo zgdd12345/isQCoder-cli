@@ -236,8 +236,8 @@
         },
         "showStatusInTitle": {
           "title": "Show Thoughts in Title",
-          "description": "Show Gemini CLI model thoughts in the terminal window title during the working phase",
-          "markdownDescription": "Show Gemini CLI model thoughts in the terminal window title during the working phase\n\n- Category: `UI`\n- Requires restart: `no`\n- Default: `false`",
+          "description": "Show isQCoder model thoughts in the terminal window title during the working phase",
+          "markdownDescription": "Show isQCoder model thoughts in the terminal window title during the working phase\n\n- Category: `UI`\n- Requires restart: `no`\n- Default: `false`",
           "default": false,
           "type": "boolean"
         },
@@ -250,8 +250,8 @@
         },
         "showHomeDirectoryWarning": {
           "title": "Show Home Directory Warning",
-          "description": "Show a warning when running Gemini CLI in the home directory.",
-          "markdownDescription": "Show a warning when running Gemini CLI in the home directory.\n\n- Category: `UI`\n- Requires restart: `yes`\n- Default: `true`",
+          "description": "Show a warning when running isQCoder in the home directory.",
+          "markdownDescription": "Show a warning when running isQCoder in the home directory.\n\n- Category: `UI`\n- Requires restart: `yes`\n- Default: `true`",
           "default": true,
           "type": "boolean"
         },
@@ -278,8 +278,8 @@
         },
         "hideContextSummary": {
           "title": "Hide Context Summary",
-          "description": "Hide the context summary (GEMINI.md, MCP servers) above the input.",
-          "markdownDescription": "Hide the context summary (GEMINI.md, MCP servers) above the input.\n\n- Category: `UI`\n- Requires restart: `no`\n- Default: `false`",
+          "description": "Hide the context summary (ISQCODER.md, MCP servers) above the input.",
+          "markdownDescription": "Hide the context summary (ISQCODER.md, MCP servers) above the input.\n\n- Category: `UI`\n- Requires restart: `no`\n- Default: `false`",
           "default": false,
           "type": "boolean"
         },
@@ -1104,8 +1104,8 @@
         },
         "loadMemoryFromIncludeDirectories": {
           "title": "Load Memory From Include Directories",
-          "description": "Controls how /memory refresh loads GEMINI.md files. When true, include directories are scanned; when false, only the current directory is used.",
-          "markdownDescription": "Controls how /memory refresh loads GEMINI.md files. When true, include directories are scanned; when false, only the current directory is used.\n\n- Category: `Context`\n- Requires restart: `no`\n- Default: `false`",
+          "description": "Controls how /memory refresh loads ISQCODER.md files. When true, include directories are scanned; when false, only the current directory is used.",
+          "markdownDescription": "Controls how /memory refresh loads ISQCODER.md files. When true, include directories are scanned; when false, only the current directory is used.\n\n- Category: `Context`\n- Requires restart: `no`\n- Default: `false`",
           "default": false,
           "type": "boolean"
         },
@@ -1928,7 +1928,7 @@
         },
         "extension": {
           "type": "object",
-          "description": "Metadata describing the Gemini CLI extension that owns this MCP server.",
+          "description": "Metadata describing the isQCoder extension that owns this MCP server.",
           "additionalProperties": {
             "type": ["string", "boolean", "number"]
           }
@@ -1959,7 +1959,7 @@
     },
     "TelemetrySettings": {
       "type": "object",
-      "description": "Telemetry configuration for Gemini CLI.",
+      "description": "Telemetry configuration for isQCoder.",
       "additionalProperties": false,
       "properties": {
         "enabled": {
@@ -2052,7 +2052,7 @@
     },
     "CustomTheme": {
       "type": "object",
-      "description": "Custom theme definition used for styling Gemini CLI output. Colors are provided as hex strings or named ANSI colors.",
+      "description": "Custom theme definition used for styling isQCoder output. Colors are provided as hex strings or named ANSI colors.",
       "additionalProperties": false,
       "properties": {
         "type": {

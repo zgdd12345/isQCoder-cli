@@ -9,7 +9,10 @@ import { spawn, exec, execSync } from 'node:child_process';
 import os from 'node:os';
 import fs from 'node:fs';
 import { start_sandbox } from './sandbox.js';
-import { FatalSandboxError, type SandboxConfig } from '@isqcoder/isqcoder-cli-core';
+import {
+  FatalSandboxError,
+  type SandboxConfig,
+} from '@isqcoder/isqcoder-cli-core';
 import { EventEmitter } from 'node:events';
 
 const { mockedHomedir, mockedGetContainerPath } = vi.hoisted(() => ({

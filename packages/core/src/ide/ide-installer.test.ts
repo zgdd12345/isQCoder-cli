@@ -228,11 +228,7 @@ describe('ide-installer', () => {
       expect(result.success).toBe(true);
       expect(child_process.spawnSync).toHaveBeenCalledWith(
         'positron',
-        [
-          '--install-extension',
-          'google.@isqcoder/isqcoder-vscode',
-          '--force',
-        ],
+        ['--install-extension', 'google.@isqcoder/isqcoder-vscode', '--force'],
         { stdio: 'pipe', shell: false },
       );
     });
@@ -273,11 +269,7 @@ describe('AntigravityInstaller', () => {
     expect(result.success).toBe(true);
     expect(child_process.spawnSync).toHaveBeenCalledWith(
       'agy',
-      [
-        '--install-extension',
-        'google.@isqcoder/isqcoder-vscode',
-        '--force',
-      ],
+      ['--install-extension', 'google.@isqcoder/isqcoder-vscode', '--force'],
       { stdio: 'pipe', shell: false },
     );
   });

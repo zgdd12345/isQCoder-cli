@@ -168,11 +168,7 @@ class VsCodeInstaller implements IdeInstaller {
     try {
       const result = child_process.spawnSync(
         commandPath,
-        [
-          '--install-extension',
-          'google.@isqcoder/isqcoder-vscode',
-          '--force',
-        ],
+        ['--install-extension', 'google.@isqcoder/isqcoder-vscode', '--force'],
         { stdio: 'pipe', shell: this.platform === 'win32' },
       );
 
@@ -218,11 +214,7 @@ class PositronInstaller implements IdeInstaller {
     try {
       const result = child_process.spawnSync(
         commandPath,
-        [
-          '--install-extension',
-          'google.@isqcoder/isqcoder-vscode',
-          '--force',
-        ],
+        ['--install-extension', 'google.@isqcoder/isqcoder-vscode', '--force'],
         { stdio: 'pipe', shell: this.platform === 'win32' },
       );
 
@@ -271,11 +263,7 @@ class AntigravityInstaller implements IdeInstaller {
     try {
       const result = child_process.spawnSync(
         commandPath,
-        [
-          '--install-extension',
-          'google.@isqcoder/isqcoder-vscode',
-          '--force',
-        ],
+        ['--install-extension', 'google.@isqcoder/isqcoder-vscode', '--force'],
         { stdio: 'pipe', shell: this.platform === 'win32' },
       );
 

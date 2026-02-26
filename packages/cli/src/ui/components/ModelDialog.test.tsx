@@ -15,7 +15,10 @@ import {
   DEFAULT_GEMINI_FLASH_MODEL,
   DEFAULT_GEMINI_FLASH_LITE_MODEL,
 } from '@isqcoder/isqcoder-cli-core';
-import type { Config, ModelSlashCommandEvent } from '@isqcoder/isqcoder-cli-core';
+import type {
+  Config,
+  ModelSlashCommandEvent,
+} from '@isqcoder/isqcoder-cli-core';
 
 // Mock dependencies
 const mockGetDisplayString = vi.fn();
