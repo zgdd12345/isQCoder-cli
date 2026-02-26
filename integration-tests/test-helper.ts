@@ -4,5 +4,5 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-export * from '@google/gemini-cli-test-utils';
-export { normalizePath } from '@google/gemini-cli-test-utils';
+export * from '@isqcoder/isqcoder-cli-test-utils';
+export { normalizePath } from '@isqcoder/isqcoder-cli-test-utils';

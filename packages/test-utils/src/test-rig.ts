@@ -18,7 +18,7 @@ import stripAnsi from 'strip-ansi';
 import * as os from 'node:os';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const BUNDLE_PATH = join(__dirname, '..', '..', '..', 'bundle/gemini.js');
+const BUNDLE_PATH = join(__dirname, '..', '..', '..', 'bundle/isqcoder.js');
 
 // Get timeout based on environment
 export function getDefaultTimeout() {
