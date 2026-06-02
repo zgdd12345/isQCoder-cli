@@ -208,10 +208,16 @@ function contentsToMessages(
 ): OpenAIMessage[] {
   const messages: OpenAIMessage[] = [];
 
-  // Handle system instruction
+  // Handle system instruction — truncate to keep payload manageable
+  // for Zhipu GLM models which fail with large contexts + tools
   const systemText = normalizeSystemInstruction(systemInstruction);
   if (systemText) {
-    messages.push({ role: 'system', content: systemText });
+    const MAX_SYSTEM_LEN = 8000;
+    const truncated =
+      systemText.length > MAX_SYSTEM_LEN
+        ? systemText.substring(0, MAX_SYSTEM_LEN) + '\n...(truncated)'
+        : systemText;
+    messages.push({ role: 'system', content: truncated });
   }
 
   for (const content of contents) {
@@ -252,8 +258,13 @@ function contentsToMessages(
         tool_calls: toolCalls,
       });
     } else {
-      // Regular text message
-      const textContent = partsToText(parts);
+      // Regular text message — truncate to keep total payload manageable
+      let textContent = partsToText(parts);
+      const MAX_MSG_LEN = 4000;
+      if (textContent.length > MAX_MSG_LEN) {
+        textContent =
+          textContent.substring(0, MAX_MSG_LEN) + '\n...(truncated)';
+      }
       messages.push({
         role,
         content: textContent || '',
@@ -279,19 +290,114 @@ function toolsToOpenAI(tools?: unknown): OpenAITool[] | undefined {
       Array.isArray(tool.functionDeclarations)
     ) {
       for (const fd of tool.functionDeclarations) {
+        // Aggressively truncate tool description to reduce request size.
+        const desc = fd.description ?? '';
+        const truncatedDesc =
+          desc.length > 100 ? desc.substring(0, 100) + '...' : desc;
+
+        // Strip parameter descriptions to minimize payload
+        // NOTE: GenAI SDK uses `parametersJsonSchema` (newer format) or
+        // `parameters` (older format). Check both.
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+        const rawParams = (fd as Record<string, unknown>)['parametersJsonSchema'] ??
+          (fd as Record<string, unknown>)['parameters'];
+        const params = rawParams
+          ? stripParamDescriptions(
+              rawParams as Record<string, unknown>,
+            )
+          : undefined;
+
         openaiTools.push({
           type: 'function',
           function: {
             name: fd.name ?? '',
-            description: fd.description,
+            description: truncatedDesc,
             // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-            parameters: fd.parameters as unknown as Record<string, unknown>,
+            parameters: params as unknown as Record<string, unknown>,
           },
         });
       }
     }
   }
-  return openaiTools.length > 0 ? openaiTools : undefined;
+
+  if (openaiTools.length === 0) return undefined;
+
+  // Zhipu GLM models fail to generate tool arguments when too many tools
+  // are present (tested: 22 tools=41KB, 15 tools=40KB → always returns "{}").
+  // Limit to MAX_ZHIPU_TOOLS to keep total payload under ~20KB.
+  const MAX_ZHIPU_TOOLS = 10;
+  if (openaiTools.length > MAX_ZHIPU_TOOLS) {
+    debugLogger.debug(
+      `[Zhipu] Trimming tools from ${openaiTools.length} to ${MAX_ZHIPU_TOOLS}`,
+    );
+    // Priority order: keep essential built-in tools first
+    const priorityTools = [
+      'write_file',
+      'read_file',
+      'list_directory',
+      'grep_search',
+      'run_command',
+      'glob',
+      'edit_file',
+      'replace_file_content',
+    ];
+
+    const prioritized: OpenAITool[] = [];
+    const rest: OpenAITool[] = [];
+
+    for (const t of openaiTools) {
+      if (priorityTools.includes(t.function.name)) {
+        prioritized.push(t);
+      } else {
+        rest.push(t);
+      }
+    }
+
+    const result = [
+      ...prioritized,
+      ...rest.slice(0, MAX_ZHIPU_TOOLS - prioritized.length),
+    ];
+    return result;
+  }
+
+  return openaiTools;
+}
+
+/**
+ * Strip parameter descriptions and examples from tool schemas.
+ * Zhipu GLM models struggle with large tool payloads (>20KB) and return
+ * empty arguments "{}". Removing descriptions reduces each tool by ~500 bytes.
+ * The parameter name + type + required info is sufficient for the model.
+ */
+function stripParamDescriptions(
+  schema: Record<string, unknown>,
+): Record<string, unknown> {
+  const result = { ...schema };
+
+  if (result['properties'] && typeof result['properties'] === 'object') {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+    const props = result['properties'] as Record<
+      string,
+      Record<string, unknown>
+    >;
+    const simplified: Record<string, Record<string, unknown>> = {};
+    for (const [key, prop] of Object.entries(props)) {
+      // Keep only essential fields: type, enum, items, required
+      const simpleProp: Record<string, unknown> = {};
+      if (prop['type']) simpleProp['type'] = prop['type'];
+      if (prop['enum']) simpleProp['enum'] = prop['enum'];
+      if (prop['items']) simpleProp['items'] = prop['items'];
+      if (prop['default'] !== undefined) simpleProp['default'] = prop['default'];
+      simplified[key] = simpleProp;
+    }
+    result['properties'] = simplified;
+  }
+
+  // Remove schema-level descriptions and extras
+  delete result['description'];
+  delete result['examples'];
+
+  return result;
 }
 
 /**
@@ -411,6 +517,9 @@ function openAIResponseToGenAI(
       const toolCalls = (msg as { tool_calls: OpenAIToolCall[] }).tool_calls;
       for (const tc of toolCalls) {
         let args: Record<string, unknown> = {};
+        debugLogger.debug(
+          `[Zhipu] Raw tool call: name="${tc.function.name}", raw_args="${tc.function.arguments}"`,
+        );
         try {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
           args = JSON.parse(tc.function.arguments) as Record<string, unknown>;
@@ -496,7 +605,7 @@ function buildRequestBody(
   const messages = contentsToMessages(contents, config?.systemInstruction);
   const tools = toolsToOpenAI(config?.tools);
 
-  return {
+  const body: OpenAIChatRequest = {
     model,
     messages,
     stream,
@@ -510,6 +619,14 @@ function buildRequestBody(
     }),
     ...(config?.stopSequences && { stop: config.stopSequences }),
   };
+
+  const bodyJson = JSON.stringify(body);
+  debugLogger.debug(
+    `[Zhipu] Request: model=${model}, stream=${stream}, tools=${tools?.length ?? 0}, ` +
+      `messages=${messages.length}, body_size=${bodyJson.length} chars`,
+  );
+
+  return body;
 }
 
 // ─── ZhipuContentGenerator ─────────────────────────────────────────────────
@@ -559,15 +676,20 @@ export class ZhipuContentGenerator implements ContentGenerator {
     _userPromptId: string,
     _role: LlmRole,
   ): Promise<AsyncGenerator<GenerateContentResponse>> {
+    // ⚠️ IMPORTANT: Zhipu's streaming API has a critical bug where tool call
+    // arguments are always sent as "{}" (empty object), even when the model
+    // correctly reasons about the parameters. The non-streaming API returns
+    // correct tool call arguments. We use the non-streaming API here and wrap
+    // the response as an async generator to work around this issue.
     const model = resolveZhipuModel(request.model);
     const config = request.config;
     const contents = normalizeContents(request.contents);
-    const body = buildRequestBody(model, contents, config, true);
+    const body = buildRequestBody(model, contents, config, false);
 
     const apiKey = this.apiKey;
     const baseUrl = this.baseUrl;
 
-    async function* streamGenerator(): AsyncGenerator<GenerateContentResponse> {
+    async function* nonStreamingAsGenerator(): AsyncGenerator<GenerateContentResponse> {
       const response = await fetch(`${baseUrl}/chat/completions`, {
         method: 'POST',
         headers: {
@@ -586,146 +708,17 @@ export class ZhipuContentGenerator implements ContentGenerator {
         );
       }
 
-      if (!response.body) {
-        throw new Error('Zhipu API returned no response body for stream');
-      }
-
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-      let buffer = '';
-      // Accumulate tool calls across stream chunks
-      const accumulatedToolCalls: Map<
-        number,
-        { id: string; name: string; arguments: string }
-      > = new Map();
-
-      try {
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-
-          buffer += decoder.decode(value, { stream: true });
-          const lines = buffer.split('\n');
-          buffer = lines.pop() ?? '';
-
-          for (const line of lines) {
-            const trimmed = line.trim();
-            if (!trimmed || !trimmed.startsWith('data: ')) continue;
-            const data = trimmed.slice(6);
-            if (data === '[DONE]') return;
-
-            try {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-              const chunk = JSON.parse(data) as OpenAIChatResponse;
-              const choice = chunk.choices?.[0];
-              if (!choice) continue;
-
-              const delta = choice.delta;
-              if (!delta) continue;
-
-              // Accumulate tool call arguments
-              if (delta.tool_calls) {
-                for (const tc of delta.tool_calls) {
-                  const idx = tc.index ?? 0;
-                  const existing = accumulatedToolCalls.get(idx);
-                  if (existing) {
-                    existing.arguments += tc.function?.arguments ?? '';
-                    if (tc.function?.name) {
-                      existing.name = tc.function.name;
-                    }
-                    if (tc.id) {
-                      existing.id = tc.id;
-                    }
-                  } else {
-                    accumulatedToolCalls.set(idx, {
-                      id: tc.id ?? `call_${idx}`,
-                      name: tc.function?.name ?? '',
-                      arguments: tc.function?.arguments ?? '',
-                    });
-                  }
-                }
-              }
-
-              // Build response for text chunks only
-              if (delta.content) {
-                const contentText = delta.content;
-                yield attachResponseGetters({
-                  candidates: [
-                    {
-                      content: {
-                        role: 'model',
-                        parts: [{ text: contentText }],
-                      },
-                      finishReason:
-                        choice.finish_reason === 'stop' ? 'STOP' : undefined,
-                    },
-                  ],
-                  usageMetadata: buildUsageMetadata(chunk.usage),
-                });
-              }
-
-              // If finish reason is tool_calls, emit the accumulated tool calls
-              if (
-                choice.finish_reason === 'tool_calls' ||
-                choice.finish_reason === 'function_call'
-              ) {
-                const toolParts: Part[] = [];
-                for (const [, tc] of accumulatedToolCalls) {
-                  let args: Record<string, unknown> = {};
-                  try {
-                    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-                    args = JSON.parse(tc.arguments) as Record<string, unknown>;
-                  } catch (parseError) {
-                    debugLogger.debug(
-                      `[Zhipu] Failed to parse streamed tool call arguments for "${tc.name}": ` +
-                        `raw="${tc.arguments}", error=${String(parseError)}`,
-                    );
-                    args = {};
-                  }
-                  toolParts.push({
-                    functionCall: {
-                      id: tc.id,
-                      name: tc.name,
-                      args,
-                    },
-                  });
-                }
-
-                yield attachResponseGetters({
-                  candidates: [
-                    {
-                      content: { role: 'model', parts: toolParts },
-                      finishReason: 'STOP',
-                    },
-                  ],
-                  usageMetadata: buildUsageMetadata(chunk.usage),
-                });
-              }
-
-              // Emit a finish chunk if stop reason is 'stop' and no content
-              if (choice.finish_reason === 'stop' && !delta.content) {
-                yield attachResponseGetters({
-                  candidates: [
-                    {
-                      content: { role: 'model', parts: [] },
-                      finishReason: 'STOP',
-                    },
-                  ],
-                  usageMetadata: buildUsageMetadata(chunk.usage),
-                });
-              }
-            } catch {
-              // Skip unparseable SSE lines
-              continue;
-            }
-          }
-        }
-      } finally {
-        reader.releaseLock();
-      }
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+      const resp = (await response.json()) as OpenAIChatResponse;
+      debugLogger.debug(
+        `[Zhipu NonStream] Response: model=${resp.model ?? 'N/A'}, ` +
+          `finish_reason=${resp.choices?.[0]?.finish_reason ?? 'N/A'}`,
+      );
+      const genAIResponse = openAIResponseToGenAI(resp);
+      yield genAIResponse;
     }
 
-    return streamGenerator();
+    return nonStreamingAsGenerator();
   }
 
   async countTokens(
