@@ -495,6 +495,7 @@ export function renderOperationalGuidelines(
 - **Security First:** Always apply security best practices. Never introduce code that exposes, logs, or commits secrets, API keys, or other sensitive information.
 
 ## Tool Usage
+- **Parameter Completeness:** When calling any tool, you MUST provide ALL required parameters with valid, non-empty values. NEVER call a tool with empty or missing required parameters (e.g., do not call read_file without file_path, or grep_search without pattern). If you cannot determine the correct parameter value, explain what you need instead of making an empty call.
 - **Parallelism:** Execute multiple independent tool calls in parallel when feasible (i.e. searching the codebase).
 - **Command Execution:** Use the ${formatToolName(SHELL_TOOL_NAME)} tool for running shell commands, remembering the safety rule to explain modifying commands first.${toolUsageInteractive(
     options.interactive,
