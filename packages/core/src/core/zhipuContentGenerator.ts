@@ -36,6 +36,24 @@ export const ZHIPU_BASE_URL = 'https://open.bigmodel.cn/api/paas/v4';
 export const ZHIPU_DEFAULT_MODEL = 'glm-5';
 export const ZHIPU_FALLBACK_MODEL = 'glm-4.7';
 
+// ─── Zhipu-specific error class ─────────────────────────────────────────────
+
+/**
+ * Custom error class for Zhipu API errors.
+ * Exposes `status` so that `getErrorStatus()` in the retry infrastructure
+ * can extract the HTTP code and `classifyGoogleError()` can classify 429
+ * as `RetryableQuotaError` for automatic exponential-backoff retry.
+ */
+export class ZhipuApiError extends Error {
+  readonly status: number;
+
+  constructor(message: string, status: number) {
+    super(message);
+    this.name = 'ZhipuApiError';
+    this.status = status;
+  }
+}
+
 // ─── OpenAI-compatible request/response types ──────────────────────────────
 
 interface OpenAIMessage {
@@ -562,8 +580,9 @@ export class ZhipuContentGenerator implements ContentGenerator {
 
       if (!response.ok) {
         const errorText = await response.text();
-        throw new Error(
+        throw new ZhipuApiError(
           `Zhipu API error (${String(response.status)}): ${errorText}`,
+          response.status,
         );
       }
 
@@ -766,8 +785,9 @@ export class ZhipuContentGenerator implements ContentGenerator {
 
     if (!response.ok) {
       const errorText = await response.text();
-      throw new Error(
+      throw new ZhipuApiError(
         `Zhipu API error (${String(response.status)}): ${errorText}`,
+        response.status,
       );
     }
 
